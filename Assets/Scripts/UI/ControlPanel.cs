@@ -9,7 +9,7 @@ namespace FacialExpression.UI
         
         public void ShowGallery()
         {
-            if(viewPanelController.CurrentView == ViewType.Gallery)
+            if(viewPanelController.CurrentView != ViewType.Gallery)
                 viewPanelController.MoveToView(ViewType.Gallery);
         }
 
