@@ -1644,6 +1644,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   viewType: 1
   navigationButton: {fileID: 263248474}
+  contentParent: {fileID: 2099865531}
 --- !u!1 &2099865530
 GameObject:
   m_ObjectHideFlags: 0
