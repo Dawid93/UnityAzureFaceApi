@@ -1,11 +1,16 @@
 ﻿using System.Collections.Generic;
+using FacialExpression.Helpers;
+using FacialExpression.Pooler;
 using UnityEngine;
+using UnityEngine.UI;
 
 namespace FacialExpression.UI
 {
     public class GalleryViewPanel : BaseViewPanel
     {
-        private List<Texture> _imageTextures;
+        [SerializeField] private Transform contentParent;
+        
+        private List<Texture2D> _imageTextures;
 
         public override void PrepareView(ViewPanelsController viewPanelsController)
         {
@@ -15,7 +20,19 @@ namespace FacialExpression.UI
 
         private void LoadGallery()
         {
-            _imageTextures = new List<Texture>();
+            _imageTextures = new List<Texture2D>();
+            
+            string[] imagesPaths = FileHelper.GetAllImagesName();
+
+            foreach (var path in imagesPaths)
+            {
+                var imageData = new Dictionary<string, string>
+                {
+                    { "path", path}
+                };
+                ObjectPooler.Instance.GetFromPool(ObjectPooler.ImagePoolTag, default, default, contentParent,
+                    imageData);
+            }
         }
 
         public void ShowImage()
