@@ -7,12 +7,15 @@ namespace FacialExpression.UI
     public class CameraViewPanel : BaseViewPanel
     {
         [SerializeField] private RawImage cameraTexture;
-
+        [SerializeField] private AspectRatioFitter aspectRatioFitter;
+        
         private bool _camIsAvailable;
         private WebCamTexture _photoCameraTexture;
 
-        void Start()
+        public override void PrepareView(ViewPanelsController viewPanelsController)
         {
+            base.PrepareView(viewPanelsController);
+        
             WebCamDevice[] devices = WebCamTexture.devices;
 
             if (devices.Length > 0)
@@ -27,6 +30,9 @@ namespace FacialExpression.UI
             }
 
             _camIsAvailable = _photoCameraTexture != null;
+            
+            if(_camIsAvailable)
+                StartRecording();
         }
 
         private void Update()
@@ -35,6 +41,8 @@ namespace FacialExpression.UI
             if(!_camIsAvailable) return;
 
             float ratio = (float) _photoCameraTexture.width / _photoCameraTexture.height;
+            aspectRatioFitter.aspectRatio = ratio;
+            
             float scaleY = _photoCameraTexture.videoVerticallyMirrored ? -1 : 1f;
             cameraTexture.rectTransform.localScale = new Vector3(1f, scaleY, 1f);
         }

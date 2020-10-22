@@ -14,7 +14,7 @@ namespace FacialExpression.UI
         
         private Vector3 _position;
 
-        public void PrepareView(ViewPanelsController viewPanelsController)
+        public virtual void PrepareView(ViewPanelsController viewPanelsController)
         {
             ViewPanelsController = viewPanelsController;
             _position = GetComponent<RectTransform>().anchoredPosition;

@@ -1,19 +1,26 @@
-﻿using UnityEngine;
+﻿using System.Collections.Generic;
+using UnityEngine;
 
 namespace FacialExpression.UI
 {
     public class GalleryViewPanel : BaseViewPanel
     {
-        // Start is called before the first frame update
-        void Start()
+        private List<Texture> _imageTextures;
+
+        public override void PrepareView(ViewPanelsController viewPanelsController)
         {
-        
+            base.PrepareView(viewPanelsController);
+            LoadGallery();
         }
 
-        // Update is called once per frame
-        void Update()
+        private void LoadGallery()
         {
-        
+            _imageTextures = new List<Texture>();
+        }
+
+        public void ShowImage()
+        {
+            
         }
     }
 }

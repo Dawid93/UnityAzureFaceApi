@@ -1151,6 +1151,7 @@ GameObject:
   - component: {fileID: 937007583}
   - component: {fileID: 937007582}
   - component: {fileID: 937007584}
+  - component: {fileID: 937007585}
   m_Layer: 5
   m_Name: CameraView
   m_TagString: Untagged
@@ -1227,6 +1228,21 @@ MonoBehaviour:
   viewType: 0
   navigationButton: {fileID: 1689747749}
   cameraTexture: {fileID: 937007582}
+  aspectRatioFitter: {fileID: 937007585}
+--- !u!114 &937007585
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 937007580}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 86710e43de46f6f4bac7c8e50813a599, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_AspectMode: 2
+  m_AspectRatio: 0.5625
 --- !u!1 &1361905033
 GameObject:
   m_ObjectHideFlags: 0
@@ -1812,7 +1828,6 @@ MonoBehaviour:
   panels:
   - {fileID: 937007584}
   - {fileID: 2013567912}
-  moveThreshold: 0
 --- !u!1 &1936050942
 GameObject:
   m_ObjectHideFlags: 0

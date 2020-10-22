@@ -7,15 +7,16 @@ namespace FacialExpression.UI
         [SerializeField] private ViewPanelsController viewPanelController;
         [SerializeField] private CameraViewPanel cameraViewPanel;
         
-        
         public void ShowGallery()
         {
-            viewPanelController.MoveToView(ViewType.Gallery);
+            if(viewPanelController.CurrentView == ViewType.Gallery)
+                viewPanelController.MoveToView(ViewType.Gallery);
         }
 
         public void ShowCamera()
         {
-            viewPanelController.MoveToView(ViewType.Camera);
+            if(viewPanelController.CurrentView != ViewType.Camera)
+                viewPanelController.MoveToView(ViewType.Camera);
         }
 
         public void TakePicture()

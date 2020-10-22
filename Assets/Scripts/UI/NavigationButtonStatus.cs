@@ -17,6 +17,8 @@ namespace FacialExpression.UI
         {
             _image = GetComponent<Image>();
             _viewPanelsController = viewPanelsController;
+            _viewPanelsController.OnViewChange += HandleOnViewChange;
+            
             HandleOnViewChange(viewPanelsController.CurrentView);
         }
 
