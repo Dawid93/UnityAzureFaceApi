@@ -21,7 +21,7 @@ namespace FacialExpression.UI
 
         public void TakePicture()
         {
-            
+            cameraViewPanel.TakePicture();
         }
     }
 }

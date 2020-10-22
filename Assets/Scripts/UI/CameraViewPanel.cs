@@ -1,7 +1,7 @@
 ﻿using System;
+using FacialExpression.Helpers;
 using UnityEngine;
 using UnityEngine.UI;
-using UnityEngine.Windows.WebCam;
 
 namespace FacialExpression.UI
 {
@@ -60,7 +60,15 @@ namespace FacialExpression.UI
             
             _rawImageRectTransform.localScale = new Vector3(-1f, scaleY, 1f);
             _rawImageRectTransform.localEulerAngles = new Vector3(0, 0, orient);
+        }
 
+        public void TakePicture()
+        {
+            Texture2D picture = new Texture2D(_photoCameraTexture.width, _photoCameraTexture.height);
+            picture.SetPixels(_photoCameraTexture.GetPixels());
+            picture.Apply();
+            
+            FileHelper.SaveImageHelper(picture);
         }
 
         private void StartRecording()
