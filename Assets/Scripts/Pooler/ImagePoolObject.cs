@@ -27,6 +27,8 @@ namespace FacialExpression.Pooler
         public override void OnSpawn(Dictionary<string, string> data)
         {
             base.OnSpawn(data);
+            
+            
             if(data == null)
                 return;
             if (!data.ContainsKey(PathKey))

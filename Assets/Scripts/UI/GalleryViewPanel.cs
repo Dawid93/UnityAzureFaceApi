@@ -30,7 +30,7 @@ namespace FacialExpression.UI
                 {
                     { "path", path}
                 };
-                ObjectPooler.Instance.GetFromPool(ObjectPooler.ImagePoolTag, default, default, contentParent,
+                ObjectPooler.Instance.GetFromPool(ObjectPooler.ImagePoolTag, Vector3.zero, Quaternion.identity, contentParent,
                     imageData);
             }
         }

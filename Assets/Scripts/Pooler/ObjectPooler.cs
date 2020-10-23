@@ -34,6 +34,7 @@ namespace FacialExpression.Pooler
 
         [SerializeField] private List<Pool> pools;
         [SerializeField] private Vector3 spawnPoint;
+        [SerializeField] private Transform poolParent;
 
         private Dictionary<string, Queue<BasePoolObject>> _poolsDict;
         private bool _isInit = false;
@@ -60,7 +61,7 @@ namespace FacialExpression.Pooler
 
                 for (int i = 0; i < pool.PoolSize; i++)
                 {
-                    var bpo = Instantiate(pool.PoolObject, spawnPoint, Quaternion.identity);
+                    var bpo = Instantiate(pool.PoolObject, spawnPoint, Quaternion.identity, poolParent);
                     bpo.OnCreate(pool.PoolTag);
                     bpo.gameObject.SetActive(false);
                     tempQ.Enqueue(bpo);
@@ -83,8 +84,8 @@ namespace FacialExpression.Pooler
 
             var bpo = _poolsDict[poolTag].Dequeue();
             bpo.transform.SetParent(parent);
-            bpo.transform.position = pos;
-            bpo.transform.rotation = rot;
+            bpo.transform.localPosition = pos;
+            bpo.transform.localRotation = rot;
             bpo.gameObject.SetActive(true);
             bpo.OnSpawn(data);
             return bpo;
