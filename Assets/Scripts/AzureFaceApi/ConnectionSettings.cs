@@ -6,9 +6,11 @@ namespace FacialExpression.AzureFaceApi
     public class ConnectionSettings : ScriptableObject
     {
         public string EndPoint => endPoint;
+        public string ClientId => clientId;
         public string PrivateKey => privateKey; 
         
         [SerializeField] private string endPoint;
+        [SerializeField] private string clientId = "Ocp-Apim-Subscription-Key";
         [SerializeField] private string privateKey;
     }
 }
