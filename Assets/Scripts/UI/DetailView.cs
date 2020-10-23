@@ -52,7 +52,10 @@ namespace FacialExpression.UI
         private void OnResponse(Response response)
         {
             var faceDatas = JsonConvert.DeserializeObject<FaceData[]>(response.Data);
-            _emotion = faceDatas[0].faceAttributes.emotion;
+            if (faceDatas != null && faceDatas.Length > 0)
+                _emotion = faceDatas[0].faceAttributes.emotion;
+            else
+                _emotion = null;
         }
     }
 }

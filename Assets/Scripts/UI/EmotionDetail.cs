@@ -17,6 +17,9 @@ namespace FacialExpression.UI
         
         public void UpdateEmotions(Emotion emotion)
         {
+            if(emotion == null)
+                emotion = new Emotion();
+            
             anger.SetText($"Anger: {emotion.anger}");
             contempt.SetText($"Contempt: {emotion.contempt}");
             disgust.SetText($"Disgust: {emotion.disgust}");

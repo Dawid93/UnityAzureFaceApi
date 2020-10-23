@@ -36,17 +36,22 @@ namespace FacialExpression.Pooler
         [SerializeField] private Vector3 spawnPoint;
 
         private Dictionary<string, Queue<BasePoolObject>> _poolsDict;
+        private bool _isInit = false;
 
         private void Awake()
         {
             if (_instance == null)
                 _instance = this;
             
-            InitializePools();
+            if(!_isInit)
+                InitializePools();
         }
 
         private void InitializePools()
         {
+            if(_isInit)
+                return;
+            
             _poolsDict = new Dictionary<string, Queue<BasePoolObject>>();
 
             foreach (var pool in pools)
@@ -62,10 +67,15 @@ namespace FacialExpression.Pooler
                 }
                 _poolsDict.Add(pool.PoolTag, tempQ);
             }
+
+            _isInit = true;
         }
         
         public BasePoolObject GetFromPool(string poolTag, Vector3 pos, Quaternion rot, Transform parent, Dictionary<string, string> data = null)
         {
+            if(!_isInit)
+                InitializePools();
+            
             if (_poolsDict == null)
                 return null;
             if (!_poolsDict.ContainsKey(poolTag))
