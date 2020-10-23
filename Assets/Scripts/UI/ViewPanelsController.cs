@@ -34,7 +34,7 @@ namespace FacialExpression.UI
 
         private void Awake()
         {
-            detailView.gameObject.SetActive(false);
+            CloseDetailView();
             _rectTransform = GetComponent<RectTransform>();
             for(int i = 0; i < panels.Length; i++)
                 SetPanelPosition(i);
