@@ -1,4 +1,5 @@
 ﻿using System;
+using FacialExpression.AzureFaceApi;
 using FacialExpression.Helpers;
 using UnityEngine;
 using UnityEngine.UI;
@@ -9,6 +10,7 @@ namespace FacialExpression.UI
     {
         [SerializeField] private RawImage cameraTexture;
         [SerializeField] private AspectRatioFitter aspectRatioFitter;
+        [SerializeField] private ImageAnalyzer analyzer;
         
         private bool _camIsAvailable;
         private WebCamTexture _photoCameraTexture;
@@ -62,13 +64,14 @@ namespace FacialExpression.UI
             _rawImageRectTransform.localEulerAngles = new Vector3(0, 0, orient);
         }
 
-        public void TakePicture()
+        public async void TakePicture()
         {
             Texture2D picture = new Texture2D(_photoCameraTexture.width, _photoCameraTexture.height);
             picture.SetPixels(_photoCameraTexture.GetPixels());
             picture.Apply();
             
-            FileHelper.SaveImageHelper(picture);
+            string path = FileHelper.SaveImageHelper(picture);
+            await analyzer.MakeAnalysisRequest(path);
         }
 
         private void StartRecording()

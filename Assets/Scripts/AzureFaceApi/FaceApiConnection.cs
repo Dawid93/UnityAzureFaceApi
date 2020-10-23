@@ -10,7 +10,7 @@ namespace FacialExpression.AzureFaceApi
     public class FaceApiConnection : MonoBehaviour
     {
         private const string DefaultContentType = "application/json";
-        private const string OptionalParameters = "etect?returnFaceId=false&returnFaceLandmarks=false&returnFaceAttributes=emotion&recognitionModel=recognition_01&returnRecognitionModel=false&detectionModel=detection_01";
+        private const string OptionalParameters = "detect?returnFaceId=false&returnFaceLandmarks=false&returnFaceAttributes=emotion&recognitionModel=recognition_01&returnRecognitionModel=false&detectionModel=detection_01";
 
         public RequestHeader ClientRequestHeader
         {
@@ -22,7 +22,7 @@ namespace FacialExpression.AzureFaceApi
             }
         }
 
-        public string ConnectionString => $"{connectionSettings.EndPoint}/face/v1.0/detect/{OptionalParameters}";
+        public string ConnectionString => $"{connectionSettings.EndPoint}/face/v1.0/{OptionalParameters}";
         
         [SerializeField] private ConnectionSettings connectionSettings;
 
@@ -46,7 +46,7 @@ namespace FacialExpression.AzureFaceApi
                 }
 
                 webRequest.uploadHandler.contentType = DefaultContentType;
-                webRequest.uploadHandler = new UploadHandlerRaw(System.Text.Encoding.UTF8.GetBytes(body));
+                webRequest.uploadHandler = new UploadHandlerFile(body);
 
                 yield return webRequest.SendWebRequest();
 

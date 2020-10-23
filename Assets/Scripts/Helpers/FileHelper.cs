@@ -28,6 +28,14 @@ namespace FacialExpression.Helpers
             return image;
         }
 
+        public static byte[] LoadImageAsArray(string path)
+        {
+            if (!File.Exists(path))
+                return null;
+
+            return File.ReadAllBytes(path);
+        }
+
         public static string[] GetAllImagesName()
         {
             return Directory.Exists(ImagePath) ? Directory.GetFiles(ImagePath) : null;

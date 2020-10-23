@@ -18,9 +18,19 @@ namespace FacialExpression.Pooler
     
     public class ObjectPooler : MonoBehaviour
     {
-        public static ObjectPooler Instance { get; private set; }
+        public static ObjectPooler Instance
+        {
+            get
+            {
+                if (_instance == null)
+                    _instance = FindObjectOfType<ObjectPooler>();
+                return _instance;
+            }
+        }
 
         public static readonly string ImagePoolTag = "imageTag";
+
+        private static ObjectPooler _instance;
 
         [SerializeField] private List<Pool> pools;
         [SerializeField] private Vector3 spawnPoint;
@@ -29,8 +39,8 @@ namespace FacialExpression.Pooler
 
         private void Awake()
         {
-            if (Instance == null)
-                Instance = this;
+            if (_instance == null)
+                _instance = this;
             
             InitializePools();
         }

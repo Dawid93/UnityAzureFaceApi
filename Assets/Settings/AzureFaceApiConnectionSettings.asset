@@ -12,6 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 49524902c74f4692a5cfa097ea6ce518, type: 3}
   m_Name: AzureFaceApiConnectionSettings
   m_EditorClassIdentifier: 
-  endPoint: https://unityfacetest.cognitiveservices.azure.com/
+  endPoint: https://unityfacetest.cognitiveservices.azure.com
   clientId: Ocp-Apim-Subscription-Key
   privateKey: 332c8fa73c854c7dbb42c23ca3345960
