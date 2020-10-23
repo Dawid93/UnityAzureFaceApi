@@ -27,7 +27,7 @@ More neutral            |  More Happy
 
 If the happines is the strongest emotion user will see little dancing guy in bottom right corner.
 
-## Configuration with Azura
+## Configuration with Azure
 
 Before you started sending data to Azure Face API you need to create Face Api resource on you Azure Dashboard. After this you need `EndPoint` and `SecretKey`.
 
