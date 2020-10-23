@@ -15,6 +15,7 @@ namespace FacialExpression.UI
         [SerializeField] private EmotionDetail emotionDetail;
         [SerializeField] private RawImage image;
         [SerializeField] private ImageAnalyzer analyzer;
+        [SerializeField] private Texture2D defaultTexture;
         
         private Emotion _emotion;
         
@@ -31,6 +32,7 @@ namespace FacialExpression.UI
         public void CloseView()
         {
             controlPanel.gameObject.SetActive(true);
+            image.texture = defaultTexture;
             gameObject.SetActive(false);
         }
 

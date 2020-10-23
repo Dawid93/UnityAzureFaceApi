@@ -10,6 +10,7 @@ namespace FacialExpression.UI
     {
         [SerializeField] private RawImage cameraTexture;
         [SerializeField] private AspectRatioFitter aspectRatioFitter;
+        [SerializeField] private Texture2D defaultTexture;
 
         private bool _camIsAvailable;
         private WebCamTexture _photoCameraTexture;
@@ -18,6 +19,8 @@ namespace FacialExpression.UI
         public override void PrepareView(ViewPanelsController viewPanelsController)
         {
             base.PrepareView(viewPanelsController);
+            cameraTexture.texture = defaultTexture;
+            
             viewPanelsController.OnViewChange += HandleOnViewChange;
             _rawImageRectTransform = cameraTexture.rectTransform;
 
@@ -83,7 +86,7 @@ namespace FacialExpression.UI
         private void StopRecording()
         {
             _photoCameraTexture.Stop();
-            cameraTexture.texture = null;
+            cameraTexture.texture = defaultTexture;
         }
 
     }

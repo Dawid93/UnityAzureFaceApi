@@ -1961,6 +1961,7 @@ MonoBehaviour:
   navigationButton: {fileID: 1689747749}
   cameraTexture: {fileID: 937007582}
   aspectRatioFitter: {fileID: 937007585}
+  defaultTexture: {fileID: 2800000, guid: 24e3a844b84a648158b337c389fa0e12, type: 3}
 --- !u!114 &937007585
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2181,6 +2182,7 @@ MonoBehaviour:
   emotionDetail: {fileID: 2140573733}
   image: {fileID: 1164287330}
   analyzer: {fileID: 1440936087}
+  defaultTexture: {fileID: 0}
 --- !u!114 &1164287330
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2194,14 +2196,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.13207549, g: 0.13207549, b: 0.13207549, a: 1}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Texture: {fileID: 0}
+  m_Texture: {fileID: 2800000, guid: 24e3a844b84a648158b337c389fa0e12, type: 3}
   m_UVRect:
     serializedVersion: 2
     x: 0
