@@ -2,6 +2,7 @@ using FacialExpression.AzureFaceApi;
 using FacialExpression.AzureFaceApi.Models;
 using FacialExpression.Helpers;
 using Newtonsoft.Json;
+using UnityEditor;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -15,7 +16,8 @@ namespace FacialExpression.UI
         [SerializeField] private EmotionDetail emotionDetail;
         [SerializeField] private RawImage image;
         [SerializeField] private ImageAnalyzer analyzer;
-        [SerializeField] private Texture2D defaultTexture;
+        [SerializeField] private RawImageSettings rawImageSettings;
+        [SerializeField] private AspectRatioFitter aspectRatioFitter;
         
         private Emotion _emotion;
         
@@ -27,12 +29,16 @@ namespace FacialExpression.UI
             _isInfoVisible = false;
             image.texture = texture2D;
             emotionDetail.gameObject.SetActive(_isInfoVisible);
+            
+            aspectRatioFitter.aspectRatio = rawImageSettings.AspectRatio;
+            
+            image.rectTransform.localScale = new Vector3(-1f, rawImageSettings.ScaleY, 1f);
         }
 
         public void CloseView()
         {
             controlPanel.gameObject.SetActive(true);
-            image.texture = defaultTexture;
+            image.texture = rawImageSettings.DefaultTexture;
             gameObject.SetActive(false);
         }
 

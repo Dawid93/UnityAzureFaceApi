@@ -10,7 +10,7 @@ namespace FacialExpression.UI
     {
         [SerializeField] private RawImage cameraTexture;
         [SerializeField] private AspectRatioFitter aspectRatioFitter;
-        [SerializeField] private Texture2D defaultTexture;
+        [SerializeField] private RawImageSettings rawImageSettings;
 
         private bool _camIsAvailable;
         private WebCamTexture _photoCameraTexture;
@@ -19,7 +19,7 @@ namespace FacialExpression.UI
         public override void PrepareView(ViewPanelsController viewPanelsController)
         {
             base.PrepareView(viewPanelsController);
-            cameraTexture.texture = defaultTexture;
+            cameraTexture.texture = rawImageSettings.DefaultTexture;
             
             viewPanelsController.OnViewChange += HandleOnViewChange;
             _rawImageRectTransform = cameraTexture.rectTransform;
@@ -60,10 +60,11 @@ namespace FacialExpression.UI
             aspectRatioFitter.aspectRatio = ratio;
             
             float scaleY = _photoCameraTexture.videoVerticallyMirrored ? -1 : 1f;
-            int orient = -_photoCameraTexture.videoRotationAngle;
             
             _rawImageRectTransform.localScale = new Vector3(-1f, scaleY, 1f);
-            _rawImageRectTransform.localEulerAngles = new Vector3(0, 0, orient);
+
+            rawImageSettings.AspectRatio = ratio;
+            rawImageSettings.ScaleY = scaleY;
         }
 
         public void TakePicture()
@@ -86,7 +87,7 @@ namespace FacialExpression.UI
         private void StopRecording()
         {
             _photoCameraTexture.Stop();
-            cameraTexture.texture = defaultTexture;
+            cameraTexture.texture = rawImageSettings.DefaultTexture;
         }
 
     }
