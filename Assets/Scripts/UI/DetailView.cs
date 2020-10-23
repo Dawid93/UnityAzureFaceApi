@@ -83,6 +83,13 @@ namespace FacialExpression.UI
 
         private void OnResponse(Response response)
         {
+            if (!string.IsNullOrEmpty(response.Error))
+            {
+                _emotion = null;
+                IsFaceDataAvailable = false;
+                return;
+            }
+            
             var faceDatas = JsonConvert.DeserializeObject<FaceData[]>(response.Data);
             if (faceDatas != null && faceDatas.Length > 0)
             {

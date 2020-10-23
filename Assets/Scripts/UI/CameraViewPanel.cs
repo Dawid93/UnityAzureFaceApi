@@ -60,8 +60,10 @@ namespace FacialExpression.UI
             aspectRatioFitter.aspectRatio = ratio;
             
             float scaleY = _photoCameraTexture.videoVerticallyMirrored ? -1 : 1f;
-            
             _rawImageRectTransform.localScale = new Vector3(-1f, scaleY, 1f);
+
+            int orient = -_photoCameraTexture.videoRotationAngle;
+            cameraTexture.rectTransform.localEulerAngles = new Vector3(0, 0, orient);
 
             rawImageSettings.AspectRatio = ratio;
             rawImageSettings.ScaleY = scaleY;

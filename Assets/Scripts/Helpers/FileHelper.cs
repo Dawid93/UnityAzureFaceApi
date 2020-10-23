@@ -6,13 +6,16 @@ namespace FacialExpression.Helpers
 {
     public static class FileHelper
     {
-        private static readonly string ImagePath = $"{Application.persistentDataPath}/captures";
-        
+        #if !UNITY_ANDROID || UNITY_EDITOR
+        private static readonly string ImagePath = $"{Application.dataPath}/captures";
+        #elif UNITY_ANDROID
+        private static readonly string ImagePath = $"file:///{Application.dataPath}/captures";
+        #endif
         public static string SaveImageHelper(Texture2D texture2D)
         {
             if (!Directory.Exists(ImagePath))
                 Directory.CreateDirectory(ImagePath);
-            string imagePath = $"/{ImagePath}/image-{ImagesInDirectoryCount()}.png";
+            string imagePath = $"/{ImagePath}/image-{Guid.NewGuid()}.png";
             File.WriteAllBytes(imagePath, texture2D.EncodeToPNG());
             return imagePath;
         }
@@ -38,12 +41,9 @@ namespace FacialExpression.Helpers
 
         public static string[] GetAllImagesName()
         {
+            Debug.
             return Directory.Exists(ImagePath) ? Directory.GetFiles(ImagePath) : null;
         }
 
-        private static int ImagesInDirectoryCount()
-        {
-            return Directory.Exists(ImagePath) ? Directory.GetFiles(ImagePath).Length : 0;
-        }
     }
 }
