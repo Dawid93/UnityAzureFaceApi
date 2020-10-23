@@ -26,8 +26,6 @@ namespace FacialExpression.UI
             
             if(imagesPaths == null || imagesPaths.Length == 0)
                 return;
-            if (imagesPaths.Length == 1 && !imagesPaths[0].Contains("image-"))
-                return;
 
             foreach (var path in imagesPaths)
             {
