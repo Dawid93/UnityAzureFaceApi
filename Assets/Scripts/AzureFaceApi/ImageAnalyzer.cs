@@ -4,6 +4,7 @@ using System.Net.Http.Headers;
 using System.Threading.Tasks;
 using FacialExpression.AzureFaceApi.Models;
 using FacialExpression.Helpers;
+using Newtonsoft.Json;
 using UnityEngine;
 
 namespace FacialExpression.AzureFaceApi
@@ -42,13 +43,9 @@ namespace FacialExpression.AzureFaceApi
                 // Display the JSON response.
                 Console.WriteLine("\nResponse:\n");
                 Console.WriteLine((contentString));
+                var obj = JsonConvert.DeserializeObject<FaceData[]>(contentString);
             }
         }
-        // public void MakeAnalysisRequest(byte[] image)
-        // {
-        //     MultipartFormFileSection fileToUpload = new MultipartFormFileSection("url", image);
-        //     StartCoroutine(faceApiConnection.HttpPost(faceApiConnection.ConnectionString, fileToUpload, (r) => OnCallbackResponse(r)));
-        // }
 
         private void OnCallbackResponse(Response response)
         {
