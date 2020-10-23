@@ -1,10 +1,6 @@
 using System;
-using System.Net.Http;
-using System.Net.Http.Headers;
-using System.Threading.Tasks;
+using System.Collections.Generic;
 using FacialExpression.AzureFaceApi.Models;
-using FacialExpression.Helpers;
-using Newtonsoft.Json;
 using UnityEngine;
 
 namespace FacialExpression.AzureFaceApi
@@ -12,44 +8,12 @@ namespace FacialExpression.AzureFaceApi
     public class ImageAnalyzer : MonoBehaviour
     {
         [SerializeField] private FaceApiConnection faceApiConnection;
-        
-        public async Task MakeAnalysisRequest(string imageFilePath)
+
+        public void MakeAnalysisRequest(byte[] image, Action<Response> callback)
         {
-            HttpClient client = new HttpClient();
-
-            // Request headers.
-            client.DefaultRequestHeaders.Add(
-                "Ocp-Apim-Subscription-Key", faceApiConnection.ClientRequestHeader.Value);
-
-            HttpResponseMessage response;
-
-            // Request body. Posts a locally stored JPEG image.
-            byte[] byteData = FileHelper.LoadImageAsArray(imageFilePath);
-
-            using (ByteArrayContent content = new ByteArrayContent(byteData))
-            {
-                // This example uses content type "application/octet-stream".
-                // The other content types you can use are "application/json"
-                // and "multipart/form-data".
-                content.Headers.ContentType =
-                    new MediaTypeHeaderValue("application/octet-stream");
-
-                // Execute the REST API call.
-                response = await client.PostAsync(faceApiConnection.ConnectionString, content);
-
-                // Get the JSON response.
-                string contentString = await response.Content.ReadAsStringAsync();
-
-                // Display the JSON response.
-                Console.WriteLine("\nResponse:\n");
-                Console.WriteLine((contentString));
-                var obj = JsonConvert.DeserializeObject<FaceData[]>(contentString);
-            }
-        }
-
-        private void OnCallbackResponse(Response response)
-        {
-            Debug.Log(response.Error);
+            List<RequestHeader> headers = new List<RequestHeader>();
+            headers.Add(faceApiConnection.ClientRequestHeader);
+            StartCoroutine(faceApiConnection.HttpPostImage(faceApiConnection.ConnectionString, image, callback, headers));
         }
     }
 }

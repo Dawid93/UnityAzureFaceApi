@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Linq;
+using FacialExpression.AzureFaceApi.Models;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
@@ -26,13 +27,14 @@ namespace FacialExpression.UI
         [SerializeField] private CanvasScaler canvasScaler;
         [SerializeField] private ViewType startViewType;
         [SerializeField] private BaseViewPanel[] panels;
+        [SerializeField] private DetailView detailView;
 
         private RectTransform _rectTransform;
         private ViewType _currentView;
 
         private void Awake()
         {
-            
+            detailView.gameObject.SetActive(false);
             _rectTransform = GetComponent<RectTransform>();
             for(int i = 0; i < panels.Length; i++)
                 SetPanelPosition(i);
@@ -63,6 +65,17 @@ namespace FacialExpression.UI
 
             if (viewPanel != null)
                 LeanTween.moveX(_rectTransform, -viewPanel.Position.x, 0.5f);
+        }
+
+        public void ShowDetailView(string path, Texture2D image)
+        {
+            detailView.gameObject.SetActive(true);
+            detailView.ShowView(path, image);
+        }
+
+        public void CloseDetailView()
+        {
+            detailView.CloseView();
         }
     }
 }

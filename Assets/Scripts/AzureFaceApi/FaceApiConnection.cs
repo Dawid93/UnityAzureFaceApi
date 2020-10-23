@@ -33,9 +33,10 @@ namespace FacialExpression.AzureFaceApi
             return new RequestHeader(connectionSettings.ClientId, connectionSettings.PrivateKey);
         }
 
-        public IEnumerator HttpPost(string url, string body, Action<Response> callback, IEnumerable<RequestHeader> headers = null)
+        
+        public IEnumerator HttpPostImage(string url, byte[] bytes, Action<Response> callback, IEnumerable<RequestHeader> headers = null)
         {
-            using (UnityWebRequest webRequest = UnityWebRequest.Post(url, body))
+            using (UnityWebRequest webRequest = UnityWebRequest.Post(url, UnityWebRequest.kHttpVerbPOST))
             {
                 if (headers != null)
                 {
@@ -45,8 +46,8 @@ namespace FacialExpression.AzureFaceApi
                     }
                 }
 
-                webRequest.uploadHandler.contentType = DefaultContentType;
-                webRequest.uploadHandler = new UploadHandlerFile(body);
+                webRequest.uploadHandler.contentType = "application/octet-stream";
+                webRequest.uploadHandler = new UploadHandlerRaw(bytes);
 
                 yield return webRequest.SendWebRequest();
 

@@ -1,4 +1,6 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
+using UnityEngine.UI;
 
 namespace FacialExpression.UI
 {
@@ -6,7 +8,22 @@ namespace FacialExpression.UI
     {
         [SerializeField] private ViewPanelsController viewPanelController;
         [SerializeField] private CameraViewPanel cameraViewPanel;
-        
+        [SerializeField] private Button takePictureBtn;
+
+        private void Awake()
+        {
+            viewPanelController.OnViewChange += viewType =>
+            {
+                SetPictureBtnInteractable(viewType);
+            };
+            SetPictureBtnInteractable(viewPanelController.CurrentView);
+        }
+
+        private void SetPictureBtnInteractable(ViewType currentViewType)
+        {
+            takePictureBtn.interactable = currentViewType == ViewType.Camera;
+        }
+
         public void ShowGallery()
         {
             if(viewPanelController.CurrentView != ViewType.Gallery)

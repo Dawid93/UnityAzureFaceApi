@@ -10,8 +10,7 @@ namespace FacialExpression.UI
     {
         [SerializeField] private RawImage cameraTexture;
         [SerializeField] private AspectRatioFitter aspectRatioFitter;
-        [SerializeField] private ImageAnalyzer analyzer;
-        
+
         private bool _camIsAvailable;
         private WebCamTexture _photoCameraTexture;
         private RectTransform _rawImageRectTransform;
@@ -64,14 +63,15 @@ namespace FacialExpression.UI
             _rawImageRectTransform.localEulerAngles = new Vector3(0, 0, orient);
         }
 
-        public async void TakePicture()
+        public void TakePicture()
         {
             Texture2D picture = new Texture2D(_photoCameraTexture.width, _photoCameraTexture.height);
             picture.SetPixels(_photoCameraTexture.GetPixels());
             picture.Apply();
             
             string path = FileHelper.SaveImageHelper(picture);
-            await analyzer.MakeAnalysisRequest(path);
+            
+            ViewPanelsController.ShowDetailView(path, picture);
         }
 
         private void StartRecording()
