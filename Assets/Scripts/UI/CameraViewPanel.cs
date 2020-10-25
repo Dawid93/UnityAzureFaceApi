@@ -48,6 +48,9 @@ namespace FacialExpression.UI
 
         private void HandleOnViewChange(ViewType viewType)
         {
+            if(_photoCameraTexture == null)
+                return;
+            
             if(viewType == ViewType.Camera && !_photoCameraTexture.isPlaying)
                 StartRecording();
             else if(viewType != ViewType.Camera)
