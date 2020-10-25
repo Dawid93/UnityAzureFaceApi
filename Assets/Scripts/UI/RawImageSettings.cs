@@ -9,6 +9,7 @@ namespace FacialExpression.UI
         public Texture2D DefaultTexture => defaultTexture;
         public float ScaleY { get; set; }
         public float AspectRatio { get; set; }
+        public float Orientation { get; set; }
         
         [SerializeField] private Texture2D defaultTexture;
     }

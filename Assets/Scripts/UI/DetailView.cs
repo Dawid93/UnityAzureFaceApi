@@ -35,6 +35,7 @@ namespace FacialExpression.UI
         
         private bool _isFaceDataAvailable;
         private bool _isInfoVisible;
+        private Image _infoButtonImage;
         
         public void ShowView(string filePath, Texture2D texture2D)
         {
@@ -50,8 +51,9 @@ namespace FacialExpression.UI
             emotionDetail.gameObject.SetActive(_isInfoVisible);
             
             aspectRatioFitter.aspectRatio = rawImageSettings.AspectRatio;
-            
             image.rectTransform.localScale = new Vector3(-1f, rawImageSettings.ScaleY, 1f);
+            image.rectTransform.localEulerAngles = new Vector3(0, 0, rawImageSettings.Orientation);
+            ChangeInfoButtonColor(Color.white);
         }
 
         private void OnOnDataAvailableChange(bool available)
@@ -87,6 +89,7 @@ namespace FacialExpression.UI
             {
                 _emotion = null;
                 IsFaceDataAvailable = false;
+                ChangeInfoButtonColor(Color.red);
                 return;
             }
             
@@ -94,13 +97,23 @@ namespace FacialExpression.UI
             if (faceDatas != null && faceDatas.Length > 0)
             {
                 _emotion = faceDatas[0].faceAttributes.emotion;
+                ChangeInfoButtonColor(Color.green);
                 IsFaceDataAvailable = true;
             }
             else
             {
                 _emotion = null;
+                ChangeInfoButtonColor(Color.red);
                 IsFaceDataAvailable = false;
             }
+        }
+
+        private void ChangeInfoButtonColor(Color color)
+        {
+            if (_infoButtonImage == null)
+                _infoButtonImage = infoButton.GetComponent<Image>();
+
+            _infoButtonImage.color = color;
         }
     }
 }

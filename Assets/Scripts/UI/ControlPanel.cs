@@ -10,12 +10,9 @@ namespace FacialExpression.UI
         [SerializeField] private CameraViewPanel cameraViewPanel;
         [SerializeField] private Button takePictureBtn;
 
-        private void Awake()
+        private void Start()
         {
-            viewPanelController.OnViewChange += viewType =>
-            {
-                SetPictureBtnInteractable(viewType);
-            };
+            viewPanelController.OnViewChange += SetPictureBtnInteractable;
             SetPictureBtnInteractable(viewPanelController.CurrentView);
         }
 

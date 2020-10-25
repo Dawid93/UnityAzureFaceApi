@@ -32,8 +32,10 @@ namespace FacialExpression.UI
                 {
                     if (device.isFrontFacing)
                     {
-                        _photoCameraTexture = new WebCamTexture(device.name, Screen.width, Screen.height);
-                        _photoCameraTexture.requestedFPS = 60;
+                        _photoCameraTexture = new WebCamTexture(device.name, Screen.width, Screen.height)
+                        {
+                            requestedFPS = 60
+                        };
                     }
                 }
             }
@@ -62,11 +64,12 @@ namespace FacialExpression.UI
             float scaleY = _photoCameraTexture.videoVerticallyMirrored ? -1 : 1f;
             _rawImageRectTransform.localScale = new Vector3(-1f, scaleY, 1f);
 
-            int orient = -_photoCameraTexture.videoRotationAngle;
+            int orient = _photoCameraTexture.videoRotationAngle;
             cameraTexture.rectTransform.localEulerAngles = new Vector3(0, 0, orient);
 
             rawImageSettings.AspectRatio = ratio;
             rawImageSettings.ScaleY = scaleY;
+            rawImageSettings.Orientation = orient;
         }
 
         public void TakePicture()
@@ -82,12 +85,16 @@ namespace FacialExpression.UI
 
         private void StartRecording()
         {
+            if(!_photoCameraTexture)
+                return;
             _photoCameraTexture.Play();
             cameraTexture.texture = _photoCameraTexture;
         }
 
         private void StopRecording()
         {
+            if(!_photoCameraTexture)
+                return;
             _photoCameraTexture.Stop();
             cameraTexture.texture = rawImageSettings.DefaultTexture;
         }

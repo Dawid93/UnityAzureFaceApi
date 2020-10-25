@@ -22,9 +22,8 @@ namespace FacialExpression.UI
                 _currentView = value;
                 OnViewChange?.Invoke(_currentView);
             }
-    }
+        }
         
-        [SerializeField] private CanvasScaler canvasScaler;
         [SerializeField] private ViewType startViewType;
         [SerializeField] private BaseViewPanel[] panels;
         [SerializeField] private DetailView detailView;
@@ -32,7 +31,7 @@ namespace FacialExpression.UI
         private RectTransform _rectTransform;
         private ViewType _currentView;
 
-        private void Awake()
+        private void Start()
         {
             CloseDetailView();
             _rectTransform = GetComponent<RectTransform>();

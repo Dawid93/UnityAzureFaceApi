@@ -5,19 +5,17 @@ namespace FacialExpression.UI
     public abstract class BaseViewPanel : MonoBehaviour
     {
         public ViewType ViewType => viewType;
-        public Vector3 Position => _position;
-        
+        public Vector3 Position { get; private set; }
+
         [SerializeField] private ViewType viewType;
         [SerializeField] private NavigationButtonStatus navigationButton;
 
         protected ViewPanelsController ViewPanelsController;
-        
-        private Vector3 _position;
 
         public virtual void PrepareView(ViewPanelsController viewPanelsController)
         {
             ViewPanelsController = viewPanelsController;
-            _position = GetComponent<RectTransform>().anchoredPosition;
+            Position = GetComponent<RectTransform>().anchoredPosition;
             navigationButton.PrepareButton(viewPanelsController);
         }
     }

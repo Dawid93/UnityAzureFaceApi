@@ -2808,7 +2808,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f5b0ea9c42d24507b631981dbd6387f0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  connectionSettings: {fileID: 11400000, guid: 51c7bab477f4a4cac82ef9ab32d7de04, type: 2}
+  connectionSettings: {fileID: 11400000, guid: b5ccb1d6c7e154813b9989d1b04d91e8, type: 2}
 --- !u!4 &1440936086
 Transform:
   m_ObjectHideFlags: 0
@@ -3356,7 +3356,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b9ce9de0f421d4f109e3b3b46d2af250, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  canvasScaler: {fileID: 150243704}
   startViewType: 0
   panels:
   - {fileID: 937007584}
