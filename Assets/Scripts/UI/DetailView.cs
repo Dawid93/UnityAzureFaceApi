@@ -51,7 +51,7 @@ namespace FacialExpression.UI
             emotionDetail.gameObject.SetActive(_isInfoVisible);
             
             aspectRatioFitter.aspectRatio = rawImageSettings.AspectRatio;
-            image.rectTransform.localScale = new Vector3(-1f, rawImageSettings.ScaleY, 1f);
+            image.rectTransform.localScale = new Vector3(1f, rawImageSettings.ScaleY, 1f);
             image.rectTransform.localEulerAngles = new Vector3(0, 0, rawImageSettings.Orientation);
             ChangeInfoButtonColor(Color.white);
         }

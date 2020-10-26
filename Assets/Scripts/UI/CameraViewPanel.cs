@@ -32,10 +32,11 @@ namespace FacialExpression.UI
                 {
                     if (device.isFrontFacing)
                     {
-                        _photoCameraTexture = new WebCamTexture(device.name, Screen.width, Screen.height)
+                        _photoCameraTexture = new WebCamTexture(device.name, Screen.width, Screen.height, 60)
                         {
-                            requestedFPS = 60
+                            filterMode = FilterMode.Trilinear
                         };
+                        
                     }
                 }
             }
@@ -65,9 +66,9 @@ namespace FacialExpression.UI
             aspectRatioFitter.aspectRatio = ratio;
             
             float scaleY = _photoCameraTexture.videoVerticallyMirrored ? -1 : 1f;
-            _rawImageRectTransform.localScale = new Vector3(-1f, scaleY, 1f);
+            _rawImageRectTransform.localScale = new Vector3(1f, scaleY, 1f);
 
-            int orient = _photoCameraTexture.videoRotationAngle;
+            int orient = -_photoCameraTexture.videoRotationAngle;
             cameraTexture.rectTransform.localEulerAngles = new Vector3(0, 0, orient);
 
             rawImageSettings.AspectRatio = ratio;
