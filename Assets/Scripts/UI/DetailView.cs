@@ -42,7 +42,7 @@ namespace FacialExpression.UI
             OnDataAvailableChange += OnOnDataAvailableChange;
             infoButton.interactable = false;
             
-            analyzer.MakeAnalysisRequest(FileHelper.LoadImageAsArray(filePath), OnResponse);
+            analyzer.MakeAnalysisRequest(texture2D.EncodeToPNG(), OnResponse);
             
             controlPanel.gameObject.SetActive(false);
             
